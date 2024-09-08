@@ -79,6 +79,3 @@ public class Basaball {
         scanner.close();
     }
 }
-        }
-    }
-}
