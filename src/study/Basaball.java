@@ -34,10 +34,10 @@ public class Basaball {
             // 결과 출력
             int game_strike = 0;
             int game_ball = 0;
-// 0908
-            for (int i = 0; i < 3; i++) {
+
+            for (int i = 0; i < 3; i++) {    // int i = 0; -> 초기 값,  i < 3; -> 반복 조건, i++ -> 값을 1씩 증가
                 for (int j = 0; j < 3; j++) {
-                    if (cp_li.get(i) == player_li.get(j)) {
+                    if (cp_li.get(i) == player_li.get(j)) {  // get()  -> 리스트의 해당 인덱스 값을 가져오기
                         if (i == j) {
                             game_strike++;
                         } else {
@@ -47,10 +47,10 @@ public class Basaball {
                 }
             }
 
-            if (game_strike == 0 && game_ball == 0) {
+            if (game_strike == 0 && game_ball == 0) {  // && -> and
                 game_out++;
             }
-
+// 0909
             if (game_out > 0) {
                 System.out.println("결과 " + game_strike + " Strike, " + game_ball + " Ball, " + game_out + " Out");
             } else {
