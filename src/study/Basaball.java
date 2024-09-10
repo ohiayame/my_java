@@ -1,7 +1,6 @@
 package study;
 
-import java.util.Random;
-import java.util.Scanner;
+import java.util.*;
 
 public class Basaball {
     public static void main(String[] args) {
@@ -19,10 +18,10 @@ public class Basaball {
 
         int game_out = 0;
         int game_count = 0;
-        scanner scanner = new Scanner(System.in); // 입력일 받기 위한 객체 생성
+        Scanner scanner = new Scanner(System.in); // 입력일 받기 위한 객체 생성
 
-        whie (true){
-            game_out++; // 원래 값에 더하기 1
+        while (true){
+            game_count++; // 원래 값에 더하기 1
             System.out.println("시도" + game_out + ": 입력한 숫자 - "); // 출력
             String[] player_input = scanner.nextLine().split(" ");  // 문자열로 입력 받고 공백을 기준으로 나누기
             List<Integer> player_li = new ArrayList<>(); // 리스트 생성
@@ -37,7 +36,7 @@ public class Basaball {
 
             for (int i = 0; i < 3; i++) {    // int i = 0; -> 초기 값,  i < 3; -> 반복 조건, i++ -> 값을 1씩 증가
                 for (int j = 0; j < 3; j++) {
-                    if (cp_li.get(i) == player_li.get(j)) {  // get()  -> 리스트의 해당 인덱스 값을 가져오기
+                    if (Objects.equals(cp_li.get(i), player_li.get(j))) {  // get()  -> 리스트의 해당 인덱스 값을 가져오기
                         if (i == j) {
                             game_strike++;
                         } else {
@@ -58,8 +57,12 @@ public class Basaball {
             }
 
             // 1) 패배 (5번 시도) 2) 패배 (아웃 2번)
-            if (game_count == 5 || game_out == 2) {
-                System.out.println("게임 종료: 패배" + (game_count == 5 ? "(시도횟수 5번 초과)" : "(2 아웃)"));
+            if (game_count == 5)  {
+                if (game_out == 2){
+                    System.out.println("게임 종료: 패배 (2 아웃)");
+                    break;
+                }
+                System.out.println("게임 종료: 패배(시도횟수 5번 초과)");
                 break;
             }
 
