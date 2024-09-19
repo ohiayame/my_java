@@ -5,6 +5,7 @@ import java.util.Scanner;
 
 public class Chp2Lab1 {
     public static void main(String[] args) {
+        // Scanner 객체 생성
         Scanner sc = new Scanner(System.in);
     // 1) 나이(정수형) 입력 받기
         System.out.print("나이 입력하세요: ");
@@ -19,17 +20,16 @@ public class Chp2Lab1 {
         int creditScore = sc.nextInt();
 
     // 4) 합계
-        int intsum = age + creditScore;
+        float allsum = (float)(age + creditScore) + height;
 
     // 5) 평균
-        float allsum = intsum + height;
-        float avg = allsum / 3;
+        float avg = allsum / 3;  // allsum: float, 3: int -> 묵시적 형변환이 일어남
 
     // 6) 결과 출력
-        System.out.println("합계: " + intsum);
-        System.out.printf("평균: %.2f\n", avg);
+        System.out.println("합계: " + allsum);
+        System.out.printf("평균: %.2f", avg);  // 소수점 둘째 자리까지 -> printf(" %.2f", 해당 변수)
 
-        sc.close();
+        sc.close();   // 사용이 끝난 후 Scanner 객체를 닫아 자원을 해제
     }
 
 }
