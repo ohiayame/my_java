@@ -44,7 +44,7 @@ public class LogicalOperatorExample {
 
         // 5)
         // 나이 : 12
-        int age = 12;
+//        int age = 12;
         // 나이가 8세 이상이고 15세이하면 참인 변수를 선언
         boolean ok = (age >= 8) && (age <= 15);
         // 결과 출력
@@ -52,7 +52,7 @@ public class LogicalOperatorExample {
 
         // ６）
         // 나이 : 30
-        int age = 30;
+//        int age = 30;
         // 나이가 13세 미만이거나 65세 이상이면 참인 변수를 선언
         boolean check = (age < 13) || (age >= 65);
         // 결과 출력
