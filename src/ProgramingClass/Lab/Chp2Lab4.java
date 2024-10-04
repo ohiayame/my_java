@@ -21,7 +21,7 @@ public class Chp2Lab4 {
 
         // 4) 몸무게를 int로 명시적 형변환하여 나이와 더한 결과를 출력
         int sumInt = age + (int)kg;
-        System.out.println("몸무게를 int로 변환한 후 몸무게와 더한 결과: " + sumInt);
+        System.out.println("몸무게를 int로 변환한 후 나이와 더한 결과: " + sumInt);
 
         sc.close();  // 사용이 끝난 후 Scanner 객체를 닫아 자원을 해제
     }

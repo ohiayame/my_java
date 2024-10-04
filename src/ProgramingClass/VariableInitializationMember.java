@@ -17,6 +17,6 @@ public class VariableInitializationMember {
 //        System.out.println(example.num);  // 컴파일 오류 발생: 변수 num이 초기화되지 않음
 
         bar = 10; // 초기화
-        System.out.println(bar);  // 출력
+        System.out.println(bar);  // 출력  10
     }
 }
