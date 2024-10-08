@@ -1,11 +1,17 @@
 package ProgramingClass.Lab;
 class BitSet{
+    // 32비트(int=4byte) 정수형 변수
     int state = 0;
 
     // 비트 설정 메서드
     // void : 반환(return) 값이 없는 메서드 (다른 패키지에서도 메서드를 호출하고 싶을 때는 public void ~
     void setBit(int position, boolean value) {
         // position 위치에 비트 값 설정
+        // 예외처리
+//        if (position < 0 || position > 31) {
+//            throw new IllegalArgumentException("Position must be between 0 and 31");
+//        }
+
         // value가 true면 | 연산과 쉬프트 연산(1 << position)을 사용해 1로 설정
         if(value){
             // 1을 옮겨서 or로 연산을 하니까 무조건 1
