@@ -49,5 +49,15 @@ public class Bit {
         int g = a & (1 << 1);  //  10 ->         10 &  10 -> 10
         System.out.println(Long.toBinaryString(g));
 
+        int kin = 0b1000;
+        System.out.println(kin);  // 8
+        System.out.println(kin>>2); // 4
+        System.out.println(kin<<1);// 16
+
+        int m = 0b10000000000000000000000000000000;
+        int i = m >> 1;
+        System.out.println(Integer.toBinaryString(i) + " : " + i);  // -1073741824 부호를 유지
+        int t = m >>> 1;
+        System.out.println(Integer.toBinaryString(t) + " : " + t);  // 1073741824
     }
 }
