@@ -9,11 +9,5 @@ public class No8_18108 {
         int year = in.nextInt();
 
         System.out.println(year - 543);
-
-        Scanner in = new Scanner(System.in);
-
-        int year = in.nextInt();
-
-        System.out.println(year - 543);
     }
 }
