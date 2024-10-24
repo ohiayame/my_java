@@ -27,14 +27,22 @@ public class Loopfor {
 //        for(char chValue = 'Z'; chValue >= 'A'; chValue--){
 //            System.out.print(chValue);
 //        }
+//
+//        int bar[] = new int[5];
+//        for(int i = 0, value = '*'; i < bar.length; i++, value += '*'){
+//            bar[i] = value;
+//        }
+//
+//        for(int i = 0;i < bar.length; i++){
+//            System.out.println(bar[i]);
+//        }
+
+
 
         int bar[] = new int[5];
-        for(int i = 0, value = '*'; i < bar.length; i++, value += '*'){
-            bar[i] = value;
-        }
 
-        for(int i = 0;i < bar.length; i++){
-            System.out.println(bar[i]);
+        for (int i : bar){
+            System.out.print(i);
         }
     }
 }
