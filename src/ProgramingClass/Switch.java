@@ -4,23 +4,23 @@ import java.util.Scanner;
 
 public class Switch {
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-
-        System.out.print("연산자: ");
-        String f = sc.nextLine();
-
-        System.out.print("숫자: ");
-        int a = sc.nextInt();
-        int b = sc.nextInt();
-
-        int result = switch (f){
-            case "+" -> a + b;
-            case "-" -> a - b;
-            default -> 0;
-        };
-
-        System.out.println(result);
-
+//        Scanner sc = new Scanner(System.in);
+//
+//        System.out.print("연산자: ");
+//        String f = sc.nextLine();
+//
+//        System.out.print("숫자: ");
+//        int a = sc.nextInt();
+//        int b = sc.nextInt();
+//
+//        int result = switch (f){
+//            case "+" -> a + b;
+//            case "-" -> a - b;
+//            default -> 0;
+//        };
+//
+//        System.out.println(result);
+//
 //        int value = 2;
 //        int a = 0;  // 이런 경우에 여기에 변수를 미리 선언하면 접근가능
 //        int num = switch (value) {
@@ -33,7 +33,7 @@ public class Switch {
 //                a = 3;
 //                yield a;
 //            }
-//            default -> 0;
+////            default -> 0;
 //        };
 //        System.out.print(num);
 
