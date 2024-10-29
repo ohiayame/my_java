@@ -3,7 +3,7 @@ package study.특강;
 import java.util.Scanner;
 
 public class No2_2 {
-    public static void calculate_average(float math_score , float science_score, float english_score ){
+    static void calculate_average(float math_score , float science_score, float english_score ){
         float all_score =  math_score + science_score + english_score;
         float avg = all_score / 3;
         char grade;
