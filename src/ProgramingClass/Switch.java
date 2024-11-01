@@ -77,13 +77,13 @@ public class Switch {
 //        System.out.println(lang);
 
 
-        // default가 없어도 되는 경우
-        boolean isActive = false;
-        String status = switch (isActive) {
-            case true -> "Active";
-            case false -> "Inactive";
-        };
-        System.out.println(status);
+//        // default가 없어도 되는 경우
+//        boolean isActive = false;
+//        String status = switch (isActive) {
+//            case true -> "Active";
+//            case false -> "Inactive";
+//        };
+//        System.out.println(status);
 
 //        enum Selection {ycjung, richard;};
 //        Selection mySelection = Selection.ycjung;
