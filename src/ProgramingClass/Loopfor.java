@@ -40,8 +40,8 @@ public class Loopfor {
 
 
         int bar[] = new int[5];
-
         for (int i : bar){
+            i = 3;
             System.out.print(i);
         }
     }

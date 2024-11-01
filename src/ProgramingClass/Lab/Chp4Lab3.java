@@ -46,16 +46,16 @@ public class Chp4Lab3 {
                 } else if (level.equals("AVERAGE")) {
                     yield "전액 장학금";
                 }
-                else{ // ???
-                    yield "Unknown";
+                else{
+                    yield "장학금 없음";
                 }
             }
             case 'B'-> {
                 if (level.equals("EXCELLENT")) {
                     yield "반액 장학금";
                 }
-                else{ // ???
-                    yield "Unknown";
+                else{
+                    yield "장학금 없음";
                 }
             }
 
@@ -68,8 +68,8 @@ public class Chp4Lab3 {
             }
 
             case 'F'-> "장학금 없음, 재수강 권장";
-            // ???
-            default -> throw new IllegalStateException("Unknown");
+
+            default -> throw new IllegalStateException("장학금 없음");
         };
 
         System.out.println(msg);
