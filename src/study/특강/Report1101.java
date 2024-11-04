@@ -41,26 +41,16 @@ public class Report1101 {
         // 배열을 순회
         // start <= rand value <= end 범위의 난수를 발생 -> 배열에 저장
         for (int i = 0; i < array.length; i++) {
-//        for (int value : array) {
             //  난수의 범위 설정: * (end - start + 1)) + start
             int randomNum = (int) (Math.random() * (end - start + 1) + start) ;
-//            value = randomNum;
             array[i] = randomNum;
 
         }
 
         // 출력
         for (int i : array) {
-            i = 3;
             System.out.print(i + " ");
         }
 
-        for (int i : array) {
-            System.out.print(i + " ");
-        }
-
-
-
-        // 출력
     }
 }

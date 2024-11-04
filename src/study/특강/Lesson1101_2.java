@@ -6,6 +6,7 @@ public class Lesson1101_2 {
             // 0~10
             int random = (int)(Math.random() * 11);
             // (Math.random() * (수의 범위)) + 최소 값;
+            // * (max - min) + min
             // 1~10
 //            int random1 = (int)(Math.random() * 10) + 1;
 //
