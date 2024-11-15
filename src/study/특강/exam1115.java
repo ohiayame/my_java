@@ -7,10 +7,10 @@ public class exam1115 {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         // 연산자(+, -, *)를 포함하는 char type 1차원 배열을 생성
-        char[] symbolArray = {'+', '-', '*'};
-
+        char[] symbolArray = {'+', '-', '*',};
+        int symbolValue = symbolArray.length;
         // random char type 1차원 배열
-        char[] randomSelectChars = new char[3];
+        char[] randomSelectChars = new char[symbolValue];
 
         // game 반복횟수 변수
         int gameCount = 0;
@@ -30,7 +30,7 @@ public class exam1115 {
 
             // 랜덤으로 3번 int 배열에 대입
             for (int i = 0; i < randomSelectChars.length; i++) {
-                randomSelectChars[i] = symbolArray[(int) (Math.random() * 3)];
+                randomSelectChars[i] = symbolArray[(int) (Math.random() * randomSelectChars.length)];
             }
 
             // random 배열출력
