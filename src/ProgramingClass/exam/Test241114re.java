@@ -10,9 +10,9 @@ public class Test241114re {
         // 게임 실행 횟수 변수 초기화
         int gameCount = 0;
         // game point
-        int getPoints = 0;
+        int gamePoints = 0;
         // 종료 msg
-        String msg = "";
+        String gameMsg = "";
         // +-* char array 생성
         char[] charArray = {'+', '-' , '*'};
 
@@ -28,7 +28,7 @@ public class Test241114re {
 
             // 아무거나 입력 받기
             System.out.print("게임을 시작하려면 아무 값이나 입력하세요");
-            String input = sc.nextLine();
+            sc.nextLine();
 
 
             // random-> 0~2 3개
@@ -39,7 +39,7 @@ public class Test241114re {
 
             // 슬롯 출력
             System.out.println("---------------------------");
-            // random배열 출력
+            // random 배열 출력
             for (int i : randomArray) {
                 System.out.print("   " + charArray[i] + "   :");
             }
@@ -50,65 +50,82 @@ public class Test241114re {
             int combo = 0;
             // combo하고있는 기호를 기록하는 변수 초기화
             int comboValue = 0;
-            // chack
-            int check = -1;
+
 
             // 점수 확인
-            // 랜덤의 값을 순회해 연속성 확인
-            for(int i = 0 ; i < randomArray.length ; i ++) {
-                // 랜덤의 값과 지난번의 랜덤의 값을 비교해서
+            // 랜덤의 값을 array의 2번째까지 순회해 연속성 확인
+            for(int i = 0 ; i < randomArray.length-1 ; i ++) {
+                // 랜덤의 값과 다음 랜덤의 값을 비교해서
                 // 만약에 같으면 연속성 +1
                 // 어떤 기호인지도 저장
-                if (randomArray[i] == check ) {
+                if (randomArray[i] == randomArray[i+1] ) {
                     combo ++;
                     comboValue = randomArray[i];
-                }// 연속적 아니면  지난번의 랜덤의 값을 갱신
-                else {
-                    check = randomArray[i];
                 }
-            }
 
-            // 연속의 횟수와 기호에 따라 점수와 msg를 부여
-            String getMsg = "";
-            // 연속적이면 변동한 점수 출력
+            }
             if (combo > 0) {
-                int scoreChange = 0;
-                getMsg = "획득";
+                // 연속의 횟수와 기호에 따라 점수와 msg를 부여
+                String msg = "획득";
+                int point = 0;
+                // 1 ) 연속된 연산자 2개
+                if (combo == 1) {
+                    switch (comboValue) {
+                        // +
+                        case 0:
+                            point++;
+                            break;
+                        // -
+                        case 1:
+                            point--;
+                            msg = "감점";
+                            break;
+                        // *
+                        case 2:
+                            point += 2;
+                            break;
+                    }
 
-                switch (comboValue) {
-                    case 0: // '+'
-                        scoreChange = combo == 1 ? 1 : 3;
-                        break;
-                    case 1: // '-'
-                        scoreChange = combo == 1 ? -1 : -3;
-                        getMsg = "감점";
-                        break;
-                    case 2: // '*'
-                        scoreChange = combo == 1 ? 2 : 5;
-                        break;
+                }// 2 ) 연속된 연산자 3개
+                else if (combo == 2) {
+                    switch (comboValue) {
+                        // +
+                        case 0:
+                            point += 3;
+                            break;
+                        // -
+                        case 1:
+                            point -= 3;
+                            msg = "감점";
+                            break;
+                        // *
+                        case 2:
+                            point += 5;
+                            break;
+                    }
                 }
-
-                getPoints += scoreChange;
-                String format = String.format("%s %d Combo - 보너스 점수 %d점 %s", charArray[comboValue], (combo+1), getPoints, getMsg);
-                System.out.println(format);
-            }else {
-                System.out.println();
+                // 전체 포인트에 합산 -> combo 상세를 출력
+                gamePoints += point;
+                System.out.printf("%s %d Combo - 보너스 점수 %d점 %s", charArray[comboValue], (combo+1), gamePoints, msg);
             }
+            // 개행
+            System.out.println();
+
 
             // 현재 점수 출력
-            System.out.println("현재 점수 : " + getPoints );
-
+            System.out.println("현재 점수 : " + gamePoints);
+            System.out.println();
 
             // 만약에 getPoints >=  5  getPoints <= - 5 종료
-            if (getPoints >=  5 || getPoints <= - 5) {
-                msg = (getPoints >=  5) ? "승리": "패배";
+            if (gamePoints >=  5 || gamePoints <= - 5) {
+                gameMsg = (gamePoints >=  5) ? "승리": "패배";
                 break;
             }
-            System.out.println();
+
         }
 
         // 최종 결과 출력
-        System.out.println(msg + "! 최종 점수 :" + getPoints);
+        System.out.println(gameMsg + "! 최종 점수 :" + gamePoints);
 
     }
 }
