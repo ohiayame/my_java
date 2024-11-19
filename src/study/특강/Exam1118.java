@@ -4,8 +4,8 @@ import java.util.Scanner;
 
 public class Exam1118 {
     // 입력 받기
-    static int ArrayLenght(Scanner sc){
-        while(true) {
+    static int ArrayLenght(Scanner sc) {
+        while (true) {
             // 3~7 사이의 정수를 입력받기
             System.out.print("Enter the number of slots (3~7): ");
             int inputArrayLength = sc.nextInt();
@@ -18,22 +18,6 @@ public class Exam1118 {
             }
             System.out.println("Invalid input. Please enter a number between 3 and 7");
         }
-    }
-    // 점수 부여
-    static int ScoreCheck(char simbol, int combo){
-        int score = 0;
-        switch (simbol) {
-            case '+':
-                score += combo;
-                break;
-            case '-':
-                score -= combo;
-                break;
-            case '*':
-                score += combo+1;
-                break;
-        }
-        return score;
     }
 
     public static void main(String[] args) {
@@ -82,9 +66,21 @@ public class Exam1118 {
                 // 만약 다음 원소랑 동일하면 점수 부여
                 if (randomArray[i] == randomArray[i+1]) {
                     combo++;
+                    // 점수 부여
+                    int score = 0;
+                    switch (randomArray[i]) {
+                        case '+':
+                            score += combo;
+                            break;
+                        case '-':
+                            score -= combo;
+                            break;
+                        case '*':
+                            score += combo+1;
+                            break;
+                    }
                     // 점수 추가
-                    // combo할 때마다 점수를 추가
-                    int score = ScoreCheck(randomArray[i], combo);
+                    roundScore += score;
 
                     // 만약 3개 연속이면 combo초기화 , 다음 원소 건너뛰기
                     if (combo >= 2){
@@ -92,7 +88,6 @@ public class Exam1118 {
                         i++;
                     }
 
-                    roundScore += score;
                 // 다른 문자면 combo초기화
                 }else{
                     combo = 0;
@@ -109,8 +104,7 @@ public class Exam1118 {
                 gameMsg = (gameScore >= 5) ? "win!" : "lose..";
                 break;
             }
-
-        }
+        }// 게임 전체 while문 종료
         // 최종 결과 출력
         System.out.println("Congratulations, you " + gameMsg);
     }
