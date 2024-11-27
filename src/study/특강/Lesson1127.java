@@ -1,8 +1,8 @@
 package study.특강;
 
 import java.util.Scanner;
-// null말고 0으로
-public class Lesson1125 {
+// null로
+public class Lesson1127 {
     static final int STUDENTS = 3;
     static final int STUDENTINFOMATION = 6;
 
@@ -63,7 +63,7 @@ public class Lesson1125 {
         String[] outputMsg = {"[학번: %.0f]", " 국어: %.1f,", " 영어: %.1f,", " 수학: %.1f,", " 합계: %.1f,", " 평균: %.2f"};
         // for) studentsGrade
         for (int i = 0; i < studentsGrade.length; i++) {
-            // 만약 null , studentsGrade[0] 이면 입력된 학생 정보가 없음을 표시
+            // 만약 null 아니면
             if (studentsGrade[i] == null) {
                 // 만약 studentsGrade[0]면
                 if (i == 0) {
@@ -90,7 +90,7 @@ public class Lesson1125 {
         // 3. 학생 삭제하기
         while (true) {
             int deleteIndex = -1;
-            boolean flag = false; // 삭제 프로그램 종료
+            boolean flag = false;
             //while) 삭제할 학생의 학번을 입력받음
             while (true) {
                 // 2 실행 -> 목록을 출력
@@ -125,13 +125,21 @@ public class Lesson1125 {
             if (flag) {
                 break;
             }
-            // 삭제 (초기화)
+
+
             // for ) deleteIndex + i < studentsGrade.length
-            for (int i = deleteIndex; i < studentsGrade.length - 1; i++) {
+            for (int i = deleteIndex ; i < studentsGrade.length-1; i++) {
+                System.out.println("test : " + i);
                 studentsGrade[i] = studentsGrade[i + 1];
+                if (studentsGrade[i+1] == null) {
+                    break;
+                }
+
             }
-            // -> studentsGrade[마지막 원소] = null
+            // 삭제 (초기화)
+            // -> studentsGrade[deleteIndex] = null
             studentsGrade[studentsGrade.length-1] = null;
+
             System.out.println("삭제가 완료되었습니다");
         }
         return studentsGrade;
@@ -141,7 +149,7 @@ public class Lesson1125 {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         int inputMenu = 0;
-        boolean flag = false; // 프로그램 종료
+        boolean flag = false;
         float[][] studentsGrade = new float[STUDENTS][];
 
         while (true) {
@@ -168,6 +176,7 @@ public class Lesson1125 {
                     break;
                 case 3:
                     studentsGrade = delete(sc, studentsGrade);
+
                     System.out.println();
                     break;
                 case 4:
@@ -182,5 +191,3 @@ public class Lesson1125 {
         System.out.println("프로그램 종료");
     }
 }
-
-
