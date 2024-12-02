@@ -15,27 +15,81 @@ public class TestStdMatrix2 {
         System.out.println("4. 종료");
         System.out.print("선택: ");
     }
+    public static int searchIndex(float[][] argStdMatrix, int argStdNumber, int argValue){
+        // 입력 받은 학번과 동일한 학번이 있는지 검사
+        // 해당 학생의 인덱스 값 저장
+        int index = -1;
+        for(int i = 0 ; i < argStdNumber ; i++) {
+            if((int)argStdMatrix[i][0] == argValue) {
+                index = i;
+                break;
+            }
+        }
+        return index;
+    }
 
     // 학생이 입력이 완료되면  true 반환
     public static boolean createStdRecord(float[][] argStdMatrix, String[] argFieldName, int argStdNumber, Scanner sc) {
-        // 만약에 학생 수가 배열보다 크면 종료
+        final int NUM_OF_FIELDS = 6;
+        boolean isOverlap = false;
+        int stdNumber = -1;
+        // 확장
         if(argStdNumber >= argStdMatrix.length) {
-            return false;
+            argStdMatrix = createStdMatrix(argStdMatrix);
+            System.out.println("배열이 확장되었습니다. 새로운 크기: " + argStdMatrix.length + "행");
         }
-        // 학생 정보 입력 받기
-        // argFieldName -> {"학번", "국어", "영어", "수학", "합계", "평균"}
-        System.out.print(argFieldName[0] + "을 입력하세요 : ");
-        argStdMatrix[argStdNumber][0] = sc.nextFloat();
 
+        while(true){
+            // 학생 정보 입력 받기
+            // argFieldName -> {"학번", "국어", "영어", "수학", "합계", "평균"}
+            System.out.print(argFieldName[0] + "을 입력하세요 : ");
+            stdNumber = sc.nextInt();
+            // 동일한 학번이 있는지 검사
+            int index = searchIndex(argStdMatrix, argStdNumber, stdNumber);
+
+            // 없으면 배열을 생성
+            if (index == -1 ){
+                // 만약에 학생 수가 배열보다 크면 확장
+                argStdMatrix[argStdNumber] = new float[NUM_OF_FIELDS];
+                break;
+            }
+            // 중복이 있으면 저장할 인덱스를 변경 또는 메뉴로 돌아가기
+            else{
+                System.out.print("중복된 입력이 있습니다.\n덮어쓰기를 희망합니까?(Y: 덮어쓰기 진행, q: 메뉴로 돌아가기)");
+                char overlapInput = sc.next().charAt(0);
+                if (overlapInput == 'Y') {
+                    argStdNumber = index;
+                    isOverlap = true;
+                    break;
+                }else if(overlapInput == 'q') {
+                    System.out.println("입력이 취소되었습니다. 메뉴로 돌아갑니다.");
+                    return false;
+                }else {// 다시 입력 받기
+                    System.out.println("잘못된 입력입니다.");
+                }
+
+            }
+        }
+        // 학번 저장
+        argStdMatrix[argStdNumber][0] = (float)stdNumber;
+
+        // 성적 입력 받고 저장
         for(int i = 1 ; i < argFieldName.length - 2 ; i++) {
             System.out.print(argFieldName[i] + "성적 : ");
             argStdMatrix[argStdNumber][i] = sc.nextFloat();
         }
-        // 합계와 평균은 for문 외에서 계산
+        // 합계와 평균은 for문 외에서 계산해서 저장
         argStdMatrix[argStdNumber][4] = argStdMatrix[argStdNumber][1] + argStdMatrix[argStdNumber][2] + argStdMatrix[argStdNumber][3];
         argStdMatrix[argStdNumber][5] = argStdMatrix[argStdNumber][4] / 3.0f;
 
-        return true;
+        // 덮어쓰기면 학생 수 증가 안함
+        if(isOverlap) {
+            System.out.println("덮어쓰기가 완료되었습니다.");
+            return false;
+        }else {
+            System.out.println("입력이 완료되었습니다.");
+            return true;
+        }
     }
 
     // 학생 목록 출력
@@ -52,6 +106,7 @@ public class TestStdMatrix2 {
         }
     }
 
+
     // 학생 삭제
     public static boolean deleteStdRecord(float[][] argStdMatrix, int argStdNumber, Scanner sc){
         int deleteStdId = -1;
@@ -66,17 +121,11 @@ public class TestStdMatrix2 {
             if (deleteStdId == -1) {
                 return false;
             }
-            // 입력 받은 학번과 동일한 학번이 있는지 검사
-            // 해당 학생의 인덱스 값 저장
-            for(int i = 0 ; i < argStdNumber ; i++) {
-                if((int)argStdMatrix[i][0] == deleteStdId) {
-                    indexOfSelectedStd = i;
-                    flag = true;
-                    break;
-                }
-            }
+
+            indexOfSelectedStd = searchIndex(argStdMatrix, argStdNumber, deleteStdId);
+
             // 동일한 학번을 찾으면 탈출
-            if (flag) {
+            if (indexOfSelectedStd == -1) {
                 break;
             }
             System.out.println("해당 학번이 존재하지 않습니다. 다시 입력해주세요");
@@ -85,26 +134,35 @@ public class TestStdMatrix2 {
         // 지우는 학생에서 모든 학생의 -1까지 반복
         // -> 다음 학생의 원소를 덮어쓰기
         for(int i = indexOfSelectedStd ; i < argStdNumber-1 ; i++) {
-//            System.out.println("test"+ i);
-            for(int j = 0 ; j < argStdMatrix[i].length ; j++) {
-                argStdMatrix[i][j] = argStdMatrix[i+1][j];
-            }
+//          System.out.println("test"+ i);
+            argStdMatrix[i] = argStdMatrix[i+1];
         }
+
         // 마지막 학생이 있었던 배열을 초기화
-        for (int j = 0 ; j < argStdMatrix[0].length ; j++) {
-            argStdMatrix[argStdNumber-1][j] = 0.0f;
-        }
+        argStdMatrix[argStdNumber-1] = null;
+
         return true;
     }
 
+    public static float[][] createStdMatrix(float[][] argStdMatrix) {
+
+        float[][] newStdMatrix = new float[argStdMatrix.length * 2][];
+
+        for(int i = 0 ; i < argStdMatrix.length ; i++) {
+            newStdMatrix[i] = argStdMatrix[i];
+        }
+
+        return newStdMatrix;
+    }
+
+
 
     public static void main(String[] args) {
-        final int NUM_OF_STUDENTS = 3; // 학생 수
-        final int NUM_OF_FIELDS = 6;
+        int students = 3; // 학생 수
         int inputValue = 0;
         int numOfStd = 0;
 
-        float[][] stdMatrix = new float[NUM_OF_STUDENTS][NUM_OF_FIELDS];
+        float[][] stdMatrix = new float[students][];
         String[] fieldName = {"학번", "국어", "영어", "수학", "합계", "평균"};
 
         Scanner sc = new Scanner(System.in);
@@ -134,10 +192,8 @@ public class TestStdMatrix2 {
                 // 학생 성적 입력
                 case 1:
                     // 학생이 입력이 가능하면 true을 반환 -> 총 학생 수를 추가
-                    if(createStdRecord(stdMatrix, fieldName, numOfStd, sc)) {
+                    if (createStdRecord(stdMatrix, fieldName, numOfStd, sc)) {
                         numOfStd++;
-                    } else {
-                        System.out.println("배열 크기 초과! 배열을 확장하세요");
                     }
                     break;
 
@@ -163,6 +219,7 @@ public class TestStdMatrix2 {
                     System.out.println("Something went wrong");
                     exit(-1);
             }
+            System.out.println();
         }
 
     }
