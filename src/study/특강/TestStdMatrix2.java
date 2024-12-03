@@ -33,11 +33,6 @@ public class TestStdMatrix2 {
         final int NUM_OF_FIELDS = 6;
         boolean isOverlap = false;
         int stdNumber = -1;
-        // 확장
-        if(argStdNumber >= argStdMatrix.length) {
-            argStdMatrix = createStdMatrix(argStdMatrix);
-            System.out.println("배열이 확장되었습니다. 새로운 크기: " + argStdMatrix.length + "행");
-        }
 
         while(true){
             // 학생 정보 입력 받기
@@ -57,6 +52,7 @@ public class TestStdMatrix2 {
             else{
                 System.out.print("중복된 입력이 있습니다.\n덮어쓰기를 희망합니까?(Y: 덮어쓰기 진행, q: 메뉴로 돌아가기)");
                 char overlapInput = sc.next().charAt(0);
+
                 if (overlapInput == 'Y') {
                     argStdNumber = index;
                     isOverlap = true;
@@ -67,9 +63,9 @@ public class TestStdMatrix2 {
                 }else {// 다시 입력 받기
                     System.out.println("잘못된 입력입니다.");
                 }
-
             }
         }
+
         // 학번 저장
         argStdMatrix[argStdNumber][0] = (float)stdNumber;
 
@@ -125,7 +121,7 @@ public class TestStdMatrix2 {
             indexOfSelectedStd = searchIndex(argStdMatrix, argStdNumber, deleteStdId);
 
             // 동일한 학번을 찾으면 탈출
-            if (indexOfSelectedStd == -1) {
+            if (indexOfSelectedStd != -1) {
                 break;
             }
             System.out.println("해당 학번이 존재하지 않습니다. 다시 입력해주세요");
@@ -144,10 +140,10 @@ public class TestStdMatrix2 {
         return true;
     }
 
-    public static float[][] createStdMatrix(float[][] argStdMatrix) {
-
+    public static float[][] expansionMatrix(float[][] argStdMatrix) {
+        // 현재 배열 크기를 2배로 확장
         float[][] newStdMatrix = new float[argStdMatrix.length * 2][];
-
+        // 복사
         for(int i = 0 ; i < argStdMatrix.length ; i++) {
             newStdMatrix[i] = argStdMatrix[i];
         }
@@ -191,6 +187,11 @@ public class TestStdMatrix2 {
             switch (inputValue) {
                 // 학생 성적 입력
                 case 1:
+                    // 확장 (메소드안에서 확장하면 반영 안됨)
+                    if(numOfStd >= stdMatrix.length) {
+                        stdMatrix = expansionMatrix(stdMatrix);
+                        System.out.println("배열이 확장되었습니다. 새로운 크기: " + stdMatrix.length + "행");
+                    }
                     // 학생이 입력이 가능하면 true을 반환 -> 총 학생 수를 추가
                     if (createStdRecord(stdMatrix, fieldName, numOfStd, sc)) {
                         numOfStd++;
@@ -203,8 +204,11 @@ public class TestStdMatrix2 {
                     break;
                 // 학생 삭제
                 case 3:
+                    // -1가 입력 될때 까지 반복
                     while(true) {
+                        // 학생정보 출력
                         printStdMatrix(stdMatrix, numOfStd);
+                        //deleteStdRecord() -> 삭제 되면 true, 임력이 -1면 false
                         if (deleteStdRecord(stdMatrix, numOfStd, sc)) {
                             System.out.println("삭제가 완료되었습니다.");
                             numOfStd--;
