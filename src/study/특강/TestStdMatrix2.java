@@ -20,14 +20,19 @@ public class TestStdMatrix2 {
     public static int searchIndex(float[][] argStdMatrix, int argStdNumber, int argValue){
 
         // 해당 학생의 인덱스 값 저장
-        int index = -1;
+        //int index = -1;
         for(int i = 0 ; i < argStdNumber ; i++) {
             if((int)argStdMatrix[i][0] == argValue) {
-                index = i;
-                break;
+
+                return i;
+//                index = i;
+//                break;
             }
         }
-        return index;
+        return -1;
+    }
+    public static boolean checkOverlap(){
+
     }
 
     // 학생이 입력이 완료되면  true 반환
@@ -133,7 +138,6 @@ public class TestStdMatrix2 {
         // 지우는 학생에서 모든 학생의 -1까지 반복
         // -> 다음 학생의 원소를 덮어쓰기
         for(int i = indexOfSelectedStd ; i < argStdNumber-1 ; i++) {
-//          System.out.println("test"+ i);
             argStdMatrix[i] = argStdMatrix[i+1];
         }
 
