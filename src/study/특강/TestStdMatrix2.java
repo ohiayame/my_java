@@ -15,8 +15,10 @@ public class TestStdMatrix2 {
         System.out.println("4. 종료");
         System.out.print("선택: ");
     }
+
+    // 입력 받은 학번과 동일한 학번이 있는지 검사
     public static int searchIndex(float[][] argStdMatrix, int argStdNumber, int argValue){
-        // 입력 받은 학번과 동일한 학번이 있는지 검사
+
         // 해당 학생의 인덱스 값 저장
         int index = -1;
         for(int i = 0 ; i < argStdNumber ; i++) {
@@ -29,23 +31,24 @@ public class TestStdMatrix2 {
     }
 
     // 학생이 입력이 완료되면  true 반환
-    public static boolean createStdRecord(float[][] argStdMatrix, String[] argFieldName, int argStdNumber, Scanner sc) {
-        final int NUM_OF_FIELDS = 6;
+    public static boolean createStdRecord(float[][] argStdMatrix, int argStdNumber, Scanner sc) {
         boolean isOverlap = false;
         int stdNumber = -1;
+        String[] fieldName = {"학번", "국어", "영어", "수학", "합계", "평균"};
 
         while(true){
             // 학생 정보 입력 받기
             // argFieldName -> {"학번", "국어", "영어", "수학", "합계", "평균"}
-            System.out.print(argFieldName[0] + "을 입력하세요 : ");
+            System.out.print(fieldName[0] + "을 입력하세요 : ");
             stdNumber = sc.nextInt();
+
             // 동일한 학번이 있는지 검사
             int index = searchIndex(argStdMatrix, argStdNumber, stdNumber);
 
-            // 없으면 배열을 생성
+            // 중복이 없으면(-1) 배열을 생성
             if (index == -1 ){
-                // 만약에 학생 수가 배열보다 크면 확장
-                argStdMatrix[argStdNumber] = new float[NUM_OF_FIELDS];
+                // 배열 생성
+                argStdMatrix[argStdNumber] = new float[fieldName.length];
                 break;
             }
             // 중복이 있으면 저장할 인덱스를 변경 또는 메뉴로 돌아가기
@@ -70,8 +73,8 @@ public class TestStdMatrix2 {
         argStdMatrix[argStdNumber][0] = (float)stdNumber;
 
         // 성적 입력 받고 저장
-        for(int i = 1 ; i < argFieldName.length - 2 ; i++) {
-            System.out.print(argFieldName[i] + "성적 : ");
+        for(int i = 1 ; i < fieldName.length - 2 ; i++) {
+            System.out.print(fieldName[i] + "성적 : ");
             argStdMatrix[argStdNumber][i] = sc.nextFloat();
         }
         // 합계와 평균은 for문 외에서 계산해서 저장
@@ -90,13 +93,13 @@ public class TestStdMatrix2 {
 
     // 학생 목록 출력
     public static void printStdMatrix(float[][] argStdMatrix, int argStdNumber) {
-        String[] argFieldName = {"[학번: %.0f]", " 국어: %.1f,", " 영어: %.1f,", " 수학: %.1f,", " 합계: %.1f,", " 평균: %.2f"};
+        String[] formatFieldName = {"[학번: %.0f]", " 국어: %.1f,", " 영어: %.1f,", " 수학: %.1f,", " 합계: %.1f,", " 평균: %.2f"};
 
         System.out.println("학생 목록:");
         // 학생 수 만큼 반복
         for(int i = 0 ; i < argStdNumber ; i++) {
             for(int j = 0 ; j < argStdMatrix[i].length ; j++) {
-                System.out.printf(argFieldName[j],argStdMatrix[i][j]);
+                System.out.printf(formatFieldName[j],argStdMatrix[i][j]);
             }
             System.out.println();
         }
@@ -159,7 +162,7 @@ public class TestStdMatrix2 {
         int numOfStd = 0;
 
         float[][] stdMatrix = new float[students][];
-        String[] fieldName = {"학번", "국어", "영어", "수학", "합계", "평균"};
+
 
         Scanner sc = new Scanner(System.in);
 
@@ -193,7 +196,7 @@ public class TestStdMatrix2 {
                         System.out.println("배열이 확장되었습니다. 새로운 크기: " + stdMatrix.length + "행");
                     }
                     // 학생이 입력이 가능하면 true을 반환 -> 총 학생 수를 추가
-                    if (createStdRecord(stdMatrix, fieldName, numOfStd, sc)) {
+                    if (createStdRecord(stdMatrix, numOfStd, sc)) {
                         numOfStd++;
                     }
                     break;
