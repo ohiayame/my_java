@@ -31,8 +31,23 @@ public class TestStdMatrix2 {
         }
         return -1;
     }
-    public static boolean checkOverlap(){
+//    public static boolean checkOverlap(){
+//
+//    }
 
+    public static int overlapInput(Scanner sc){
+        System.out.print("중복된 입력이 있습니다.\n덮어쓰기를 희망합니까?(Y: 덮어쓰기 진행, q: 메뉴로 돌아가기)");
+        char overlapInput = sc.next().charAt(0);
+        switch(overlapInput){
+            case 'Y':
+                return 0;
+            case 'q':
+                System.out.println("입력이 취소되었습니다. 메뉴로 돌아갑니다.");
+                return 1;
+            default:
+                System.out.println("잘못된 입력입니다.");
+                return 2;
+        }
     }
 
     // 학생이 입력이 완료되면  true 반환
@@ -58,18 +73,13 @@ public class TestStdMatrix2 {
             }
             // 중복이 있으면 저장할 인덱스를 변경 또는 메뉴로 돌아가기
             else{
-                System.out.print("중복된 입력이 있습니다.\n덮어쓰기를 희망합니까?(Y: 덮어쓰기 진행, q: 메뉴로 돌아가기)");
-                char overlapInput = sc.next().charAt(0);
-
-                if (overlapInput == 'Y') {
+                int result = overlapInput(sc);
+                if (result == 0) {
                     argStdNumber = index;
                     isOverlap = true;
                     break;
-                }else if(overlapInput == 'q') {
-                    System.out.println("입력이 취소되었습니다. 메뉴로 돌아갑니다.");
+                }else if (result == 1) {
                     return false;
-                }else {// 다시 입력 받기
-                    System.out.println("잘못된 입력입니다.");
                 }
             }
         }
