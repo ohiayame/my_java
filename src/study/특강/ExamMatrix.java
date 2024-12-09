@@ -57,7 +57,7 @@ public class ExamMatrix {
         for (int row = 0; row < argMatrix.length; row++){
             for (int col = 0; col < argMatrix[row].length; col++){
                 // 중복 있으면
-                if (argMatrix[row][col] == argValue){
+                if (argValue != 0 && argMatrix[row][col] == argValue){
                     return true;
                 }
             }
@@ -68,7 +68,7 @@ public class ExamMatrix {
     static int randomNum(int[][] argMatrix, int[]argRandomRange){
         while (true) {
             // 10~20 -> 10과 20도 포함
-            int randomNum = (int) (Math.random() * (argRandomRange[1]+1 - (argRandomRange[0]))) + (argRandomRange[0]);
+            int randomNum = argRandomRange[0] + (int) (Math.random() * (argRandomRange[1] - argRandomRange[0] + 1));
             // 중복확인
             if (!isOverlap(argMatrix, randomNum)) {
                 return randomNum;
@@ -85,7 +85,6 @@ public class ExamMatrix {
                 }
             }
         }
-
     }
 
     // 2)
