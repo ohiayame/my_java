@@ -8,7 +8,7 @@ class Bar {
 }
 
 public class printNum extends Bar {
-    printNum() {
+    protected printNum() {
         getX();
     }
 }
